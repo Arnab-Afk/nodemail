@@ -107,6 +107,53 @@ app.post('/contact', (req, res) => {
 });
 
 
+app.post('/query', (req, res) => {
+    const { firstName, lastName, email, headline, message } = req.body;
+  
+    if (!firstName || !lastName || !email || !headline || !message) {
+      return res.status(400).send('All fields are required');
+    }
+  
+    // Setup email data for the admin
+    const mailOptionsForAdmin = {
+      from: 'newsletterastravant@gmail.com',
+      to: 'arnab.b@somaiya.edu',
+      subject: 'New Query Form Submission',
+      text: `
+        First Name: ${firstName}
+        Last Name: ${lastName}
+        Email: ${email}
+        Headline: ${headline}
+        Message: ${message}
+      `
+    };
+  
+    // Send notification email to the admin
+    transporter.sendMail(mailOptionsForAdmin, (error, info) => {
+      if (error) {
+        return res.status(500).send(error.toString());
+      }
+  
+      // Setup email data for the user
+      const mailOptionsForUser = {
+        from: 'newsletterastravant@gmail.com',
+        to: email,
+        subject: 'Query Form Submission Confirmation',
+        text: 'Thank you for reaching out to us. We will get back to you soon.'
+      };
+  
+      // Send confirmation email to the user
+      transporter.sendMail(mailOptionsForUser, (error, info) => {
+        if (error) {
+          return res.status(500).send(error.toString());
+        }
+  
+        res.status(200).send('Query form submission successful and admin notified');
+      });
+    });
+  });
+
+
 app.post('/property-inquiry', (req, res) => {
     const { firstName, lastName, phoneNumber, propertyRequirements, budgetRange } = req.body;
   
