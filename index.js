@@ -108,9 +108,9 @@ app.post('/contact', (req, res) => {
 
 
 app.post('/query', (req, res) => {
-    const { firstName, lastName, email, headline, message } = req.body;
+    const { firstName, lastName, email, query, description } = req.body;
   
-    if (!firstName || !lastName || !email || !headline || !message) {
+    if (!firstName || !lastName || !email || !query || !description) {
       return res.status(400).send('All fields are required');
     }
   
@@ -123,8 +123,8 @@ app.post('/query', (req, res) => {
         First Name: ${firstName}
         Last Name: ${lastName}
         Email: ${email}
-        Headline: ${headline}
-        Message: ${message}
+        Headline: ${query}
+        Message: ${description}
       `
     };
   
