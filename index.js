@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3000;
+const port = 10000;
 
 app.use(bodyParser.json());
 
