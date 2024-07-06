@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const port = 10000;
+const port = process.env.PORT||10000;
 
 app.use(bodyParser.json());
 app.use(cors({ origin: '*' }));
@@ -106,6 +106,37 @@ app.post('/contact', (req, res) => {
   });
 });
 
+
+app.post('/property-inquiry', (req, res) => {
+    const { firstName, lastName, phoneNumber, propertyRequirements, budgetRange } = req.body;
+  
+    if (!firstName ||!lastName ||!phoneNumber ||!propertyRequirements ||!budgetRange) {
+      return res.status(400).send('All fields are required');
+    }
+  
+    // Setup email data for the admin
+    const mailOptionsForAdmin = {
+      from: 'newsletterastravant@gmail.com',
+      to: 'arnab.b@somaiya.edu',
+      subject: 'New Property Inquiry',
+      text: `
+        First Name: ${firstName}
+        Last Name: ${lastName}
+        Phone Number: ${phoneNumber}
+        Property Requirements: ${propertyRequirements}
+        Budget: ${budgetRange}
+      `
+    };
+  
+    // Send notification email to the admin
+    transporter.sendMail(mailOptionsForAdmin, (error, info) => {
+      if (error) {
+        return res.status(500).send(error.toString());
+      }
+  
+      res.status(200).send('Property inquiry submission successful and admin notified');
+    });
+  });
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
