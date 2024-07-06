@@ -43,7 +43,7 @@ app.post('/subscribe', (req, res) => {
         // Setup email data for the admin
         const mailOptionsForAdmin = {
             from: 'newsletterastravant@gmail.com',
-            to: 'arnab.b@somaiya.edu',
+            to: 'newsletterastravant@gmail.com',
             subject: 'New Subscription',
             text: `New user ${email} subscribed to the newsletter`
         };
