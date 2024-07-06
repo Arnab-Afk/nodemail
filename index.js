@@ -1,11 +1,13 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const port = 10000;
 
 app.use(bodyParser.json());
+app.use(cors({ origin: '*' }));
 
 // Create a transporter object using the default SMTP transport
 const transporter = nodemailer.createTransport({
