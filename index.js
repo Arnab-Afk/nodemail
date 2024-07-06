@@ -70,7 +70,7 @@ app.post('/contact', (req, res) => {
   // Setup email data for the admin
   const mailOptionsForAdmin = {
     from: 'newsletterastravant@gmail.com',
-    to: 'arnab.b@somaiya.edu',
+    to: 'newsletterastravant@gmail.com',
     subject: 'New Contact Form Submission',
     text: `
       First Name: ${firstName}
@@ -117,7 +117,7 @@ app.post('/query', (req, res) => {
     // Setup email data for the admin
     const mailOptionsForAdmin = {
       from: 'newsletterastravant@gmail.com',
-      to: 'arnab.b@somaiya.edu',
+      to: 'newsletterastravant@gmail.com',
       subject: 'New Query Form Submission',
       text: `
         First Name: ${firstName}
@@ -164,7 +164,7 @@ app.post('/property-inquiry', (req, res) => {
     // Setup email data for the admin
     const mailOptionsForAdmin = {
       from: 'newsletterastravant@gmail.com',
-      to: 'arnab.b@somaiya.edu',
+      to: 'newsletterastravant@gmail.com',
       subject: 'New Property Inquiry',
       text: `
         First Name: ${firstName}
