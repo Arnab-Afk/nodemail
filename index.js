@@ -107,6 +107,59 @@ app.post('/contact', (req, res) => {
 });
 
 
+app.post('/proplistban', (req, res) => {
+  const { firstName, lastName, email, propertyLocation, propertyAcres, numberOfBHK, googleMapsLink, expectedSaleAndRent, query, description, parking } = req.body;
+  
+  if (!firstName || !lastName || !email || !propertyLocation || !propertyAcres || !numberOfBHK || !googleMapsLink || !expectedSaleAndRent || !query || !description || !parking) {
+    return res.status(400).send('All fields are required');
+  }
+  
+  // Setup email data for the admin
+  const mailOptionsForAdmin = {
+    from: 'newsletterastravant@gmail.com',
+    to: 'newsletterastravant@gmail.com',
+    subject: 'New Property Listing',
+    text: `
+      First Name: ${firstName}
+      Last Name: ${lastName}
+      Email: ${email}
+      Property Location: ${propertyLocation}
+      Property Acres: ${propertyAcres}
+      Number of BHK: ${numberOfBHK}
+      Google Maps Link: ${googleMapsLink}
+      Expected Sale and Rent: ${expectedSaleAndRent}
+      Query: ${query}
+      Description: ${description}
+      Parking: ${parking}
+    `
+  };
+  
+  // Send notification email to the admin
+  transporter.sendMail(mailOptionsForAdmin, (error, info) => {
+    if (error) {
+      return res.status(500).send(error.toString());
+    }
+    
+    // Setup email data for the user
+    const mailOptionsForUser = {
+      from: 'newsletterastravant@gmail.com',
+      to: email,
+      subject: 'Property Listing Submission Confirmation',
+      text: 'Thank you for listing your property with us. We will get back to you soon.'
+    };
+    
+    // Send confirmation email to the user
+    transporter.sendMail(mailOptionsForUser, (error, info) => {
+      if (error) {
+        return res.status(500).send(error.toString());
+      }
+      res.status(200).send('Property listing submission successful and admin notified');
+    });
+  });
+});
+
+
+
 app.post('/query', (req, res) => {
     const { firstName, lastName, email, query, description } = req.body;
   
