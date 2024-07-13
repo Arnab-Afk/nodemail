@@ -117,7 +117,7 @@ app.post('/proplistban', (req, res) => {
   // Setup email data for the admin
   const mailOptionsForAdmin = {
     from: 'newsletterastravant@gmail.com',
-    to: 'newsletterastravant@gmail.com',
+    to: 'arnab.b@somaiya.edu',
     subject: 'New Property Listing',
     text: `
       First Name: ${firstName}
