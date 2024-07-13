@@ -110,7 +110,7 @@ app.post('/contact', (req, res) => {
 app.post('/proplistban', (req, res) => {
   const { firstName, lastName, email, propertyLocation, propertyAcres, numberOfBHK, googleMapsLink, expectedSaleAndRent, query, description, parking } = req.body;
   
-  if (!firstName || !lastName || !email || !propertyLocation || !propertyAcres || !numberOfBHK || !googleMapsLink || !expectedSaleAndRent || !query || !description || !parking) {
+  if (!firstName || !lastName || !email || !propertyLocation || !propertyAcres || !numberOfBHK || !googleMapsLink || !expectedSaleAndRent || !description || !parking) {
     return res.status(400).send('All fields are required');
   }
   
@@ -128,7 +128,6 @@ app.post('/proplistban', (req, res) => {
       Number of BHK: ${numberOfBHK}
       Google Maps Link: ${googleMapsLink}
       Expected Sale and Rent: ${expectedSaleAndRent}
-      Query: ${query}
       Description: ${description}
       Parking: ${parking}
     `
